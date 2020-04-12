@@ -10,6 +10,7 @@ namespace CreditCardChecker
         /// </summary>
         public static bool IsCreditCardValid(string creditCardNumber)
         {
+		if (creditCardNumber.Length != 16) return false;
             bool result = true;
             for (int i = 0; i < creditCardNumber.Length; i++)
 			   {
@@ -17,6 +18,7 @@ namespace CreditCardChecker
                if(!result)
                {
                   Console.WriteLine($"Zeichen an die Stelle {i} ist keine Ziffer", i+1);
+		       break;
                }
 			   } 
             int oddsum = 0, evensum = 0, checksum, counter = 0;
@@ -26,7 +28,7 @@ namespace CreditCardChecker
 			      {
                   if(i % 2 == 0)
                   {
-                     evensum += CalculateDigitSum(creditCardNumber[i] - '0' * 2);
+                     evensum += CalculateDigitSum((creditCardNumber[i] - '0') * 2);
                   }
                   else
                   {
